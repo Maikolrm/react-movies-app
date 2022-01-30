@@ -1,5 +1,8 @@
 import React, { useEffect } from "react"
 
+// COMPONENTS
+import Container from "./Container"
+
 function Page(props) {
   
   useEffect(() => {
@@ -8,9 +11,9 @@ function Page(props) {
   }, [props.title])
 
   return (
-    <>
+    <Container grid={props.grid}>
       {props.children}
-    </>
+    </Container>
   )
 }
 
