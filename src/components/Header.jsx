@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useEffect, useContext, useEref, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 // CONTEXT
@@ -6,6 +6,9 @@ import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
 function Header(props) {
+
+  // BUTTON REF
+  const button = useRef()
 
   // NAVIGATE
   const navigate = useNavigate()
@@ -24,6 +27,21 @@ function Header(props) {
       appDispatch({ type: 'search-movies' })
     }
   }
+
+  // HANDLE KEYPREESS
+  function handleKeypres(e) {
+    // keyCode === 27 means Escape key
+    if (e.keyCode === 27) {
+      appDispatch({ type: 'show-menu', value: false })
+      button.current.blur()
+    }
+  }
+
+  // TOGGLE KEYPRESS EVENT
+  useEffect(() => {
+    document.addEventListener('keyup', handleKeypres)
+    return () => document.removeEventListener('keyup', handleKeypres)
+  }, [])
 
   return (
     <div className="flex items-center justify-between bg-sky-900 px-4 py-2">
@@ -55,14 +73,16 @@ function Header(props) {
         {/* MOVIES SUGGESTIONS */}
       </div>
       <div className="relative">
-        <button className="block w-10 h-10 border-2 border-gray-400 rounded-full focus:border-teal-600 outline-none overflow-hidden">
+        <button ref={button} onClick={() => appDispatch({ type: 'show-menu', value: !appState.showMenu })} className="block w-10 h-10 border-2 border-gray-400 rounded-full focus:border-teal-600 outline-none overflow-hidden">
           <img src="https://www.gravatar.com/avatar/4c47390a9b7da357a0d6d051bbf66270?s=200" alt="Maikol Hernandez" />
         </button>
-        <div className="absolute z-20 right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
-          <Link to="/favorites" className="block p-2 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right">( {appState.favorites.length} )</span></Link>
-          <Link to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right">( {appState.watched.length} )</span></Link>
-          <button className="block w-full py-2 mt-1 bg-sky-400 rounded-sm text-sm text-white outline-none hover:bg-sky-500 focus:bg-sky-500">Logout</button>
-        </div>
+        {appState.showMenu && (
+          <div className="absolute z-20 right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/favorites" className="block p-2 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right">( {appState.favorites.length} )</span></Link>
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right">( {appState.watched.length} )</span></Link>
+            <button className="block w-full py-2 mt-1 bg-sky-400 rounded-sm text-sm text-white outline-none hover:bg-sky-500 focus:bg-sky-500">Logout</button>
+          </div>
+        )}
       </div>
     </div>
   )
