@@ -7,6 +7,7 @@ import axios from 'axios'
 
 // COPONENTS
 import Page from "./Page"
+import MovieCast from "./MovieCast"
 
 function MovieOverview(props) {
 
@@ -19,8 +20,8 @@ function MovieOverview(props) {
   
   // FETCH DATA
   useEffect(() => {
+    const request = axios.CancelToken.source()
     async function fecthData() {
-      const request = axios.CancelToken.source()
       try {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_APP_MDB_KEY}`
         const movie = await axios.get(url)
@@ -67,24 +68,7 @@ function MovieOverview(props) {
             </div>
           </div>
         </div>
-        {/* CASTING */}
-        <div className="mt-5 w-[90%] bg-gray-100 m-auto">
-          <h2 className="text-lg font-semibold text-gray-500">Movie Cast</h2>
-          <div className="flex overflow-auto py-2 mt-3">
-            {state.cast.map(actor => (
-              <div key={actor.id} className="min-w-[200px] mr-3 bg-white rounded overflow-hidden shadow">
-                <div className="h-[250px] bg-gray-200 overflow-hidden">
-                  <img src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
-                </div>
-                <div className="p-2">
-                  <h3 className="text-md text-gray-800 font-bold leading-none tracking-wide truncate">{actor.name}</h3>
-                  <p className="mt-2 text-xs text-gray-400 leading-none truncate">{actor.character}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* CASTING */}
+        {Boolean(state.cast.length) && <MovieCast cast={state.cast} />}
       </div>
     </Page>
   )
