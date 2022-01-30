@@ -22,7 +22,7 @@ function App() {
     fetching: false,
     query: 'wick',
     movies: [],
-    favorites: [{ id: 99861 }],
+    favorites: [],
     watched: [],
     requestCount: 1
   }
@@ -42,6 +42,14 @@ function App() {
         draft.query = ''
         draft.fetching = false
         break
+      case `toggle-collections`:
+        // COLLECTION MAKES REFERENCES TO FAVORITES OR WATCHED MOVIES
+        if (action.isInCollection) {
+          draft[action.collection] = draft[action.collection].filter(movie => movie.id != action.movie.id)
+        } else {
+          draft[action.collection].push(action.movie)
+        }
+        break
     }
   }
   
@@ -54,7 +62,7 @@ function App() {
         <Header query={state.query} fetching={state.fetching} />
         <Routes>
           <Route path="/" element={<Homepage query={state.query} requestCount={state.requestCount} />} />
-          <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} />} />
+          <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
         </Routes>
       </BrowserRouter>
     </AppDispatch.Provider>
