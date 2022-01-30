@@ -14,37 +14,39 @@ function MovieOverview(props) {
   const { id } = useParams()
 
   // LOCAL STATE
-  const [movie, setMovie] = useState({})
-  const [cast, setCast] = useState([])
-  const [director, setDirector] = useState({})
-  const isFavorite = props.favorites.find(favorite => favorite.id === movie.id)
+  const [state, setState] = useImmer({ movie: {}, cast: [], director: {} })
+  const isFavorite = props.favorites.find(favorite => favorite.id === state.movie.id)
   
   // FETCH DATA
   useEffect(() => {
     async function fecthData() {
+      const request = axios.CancelToken.source()
       try {
         const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_APP_MDB_KEY}`
         const movie = await axios.get(url)
         const credits = await axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${import.meta.env.VITE_APP_MDB_KEY}`)
         const directors = credits.data.crew.filter(crew => crew.job === 'Director')
-        setMovie(movie.data)
-        setCast(credits.data.cast.slice(0, 10))
-        setDirector(directors[0])
+        setState(draft => {
+          draft.movie = movie.data
+          draft.cast = credits.data.cast.slice(0, 10)
+          draft.director = directors[0]
+        })
       } catch(e) { console.log(e) }
     }
     fecthData()
+    return () => request.cancel()
   }, [])
 
   return (
-    <Page title={`${movie.title ? movie.title + ' - Overview': '..'}`} >
+    <Page title={`${state.movie.title ? state.movie.title + ' - Overview': '...'}`} >
       <div className="py-12">
-        <div className="bg-gray-100 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(https://themoviedb.org/t/p/w1280${movie.backdrop_path})` } }>
+        <div className="bg-gray-100 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` } }>
           <div className="bg-black/60 p-[2vw] flex">
             <div className="w-[20vw] max-w-[400px] rounded-lg overflow-hidden shadow-lg">
-              <img className="w-full h-full object-cover" src={`https://themoviedb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
+              <img className="w-full h-full object-cover" src={`https://themoviedb.org/t/p/w400${state.movie.poster_path}`} alt={state.movie.title} />
             </div>
             <div className="flex flex-1 flex-col justify-center px-[2vw] pr-[20vw]">
-              <h1 className="font-semibold text-[1.5vw] text-gray-100 leading-none">{movie.title}</h1>
+              <h1 className="font-semibold text-[1.5vw] text-gray-100 leading-none">{state.movie.title}</h1>
               {/* ACTIONS */}
               <div className="flex items-center py-6">
                 <button className="w-10 h-10 bg-sky-900 rounded-full text-white text-sm leading-10"><i className="fas fa-tasks"></i></button>
@@ -53,14 +55,14 @@ function MovieOverview(props) {
                 <button className="pl-5 font-bold text-white leading-none">view trailer</button>
               </div>
               {/* ACTIONS */}
-              <h2 className="text-sm text-gray-300 italic tracking-wide">{movie.tagline}</h2>
+              <h2 className="text-sm text-gray-300 italic tracking-wide">{state.movie.tagline}</h2>
               <div className="mt-4">
                 <h3 className="font-bold text-xl text-white leading-none">Vista general</h3>
-                <p className="mt-4 text-white leading-8 tracking-wide">{movie.overview}</p>
+                <p className="mt-4 text-white leading-8 tracking-wide">{state.movie.overview}</p>
               </div>
               <div className="mt-6">
-                <h3 className="font-semibold text-md text-white leading-none">{director.name}</h3>
-                <p className="mt-2 text-xs text-white tracking-wide">{director.job}</p>
+                <h3 className="font-semibold text-md text-white leading-none">{state.director.name}</h3>
+                <p className="mt-2 text-xs text-white tracking-wide">{state.director.job}</p>
               </div>
             </div>
           </div>
@@ -69,7 +71,7 @@ function MovieOverview(props) {
         <div className="mt-5 w-[90%] bg-gray-100 m-auto">
           <h2 className="text-lg font-semibold text-gray-500">Movie Cast</h2>
           <div className="flex overflow-auto py-2 mt-3">
-            {cast.map(actor => (
+            {state.cast.map(actor => (
               <div key={actor.id} className="min-w-[200px] mr-3 bg-white rounded overflow-hidden shadow">
                 <div className="h-[250px] bg-gray-200 overflow-hidden">
                   <img src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
