@@ -4,10 +4,10 @@ import React, { useEffect } from "react"
 import Page from "./Page"
 import Movies from "./Movies"
 
-function MoviesCollection({ collection, movies }) {
+function MoviesCollection({ movies, collection }) {
   return (
     <Page title={`${collection} Movies`}>
-      <Movies movies={movies} remove={true} />
+      <Movies movies={movies} remove={true} collection={collection} />
     </Page>
   )
 }
