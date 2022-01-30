@@ -2,12 +2,16 @@ import React, { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 // CONTEXT
+import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
 function Header(props) {
 
   // NAVIGATE
   const navigate = useNavigate()
+
+  // APP STATE
+  const appState = useContext(AppState)
 
   // APP DISPATCH
   const appDispatch = useContext(AppDispatch)
@@ -54,9 +58,9 @@ function Header(props) {
         <button className="block w-10 h-10 border-2 border-gray-400 rounded-full focus:border-teal-600 outline-none overflow-hidden">
           <img src="https://www.gravatar.com/avatar/4c47390a9b7da357a0d6d051bbf66270?s=200" alt="Maikol Hernandez" />
         </button>
-        <div className="hidden absolute z-10 right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
-          <a href="#" className="block p-2 hover:bg-gray-100 text-sm text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right">0</span></a>
-          <a href="#" className="block p-2 mt-1 hover:bg-gray-100 text-sm text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right">0</span></a>
+        <div className="absolute z-20 right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
+          <Link to="/favorites" className="block p-2 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right">( {appState.favorites.length} )</span></Link>
+          <Link to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right">( {appState.watched.length} )</span></Link>
           <button className="block w-full py-2 mt-1 bg-sky-400 rounded-sm text-sm text-white outline-none hover:bg-sky-500 focus:bg-sky-500">Logout</button>
         </div>
       </div>
