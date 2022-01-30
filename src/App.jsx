@@ -84,7 +84,7 @@ function App() {
       <BrowserRouter>
         <Header query={state.query} fetching={state.fetching} />
         <Routes>
-          <Route path="/" element={<Homepage query={state.query} requestCount={state.requestCount} />} />
+          <Route path="/" element={<Homepage movies={state.movies} query={state.query} requestCount={state.requestCount} />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
           <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
           <Route path="/watched" element={<MoviesCollection collection="watched" movies={state.watched} />} />
