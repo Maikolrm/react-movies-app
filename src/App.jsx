@@ -14,6 +14,7 @@ import AppDispatch from './AppDispatch'
 import Header from './components/Header'
 import Homepage from './components/Homepage'
 import MovieOverview from './components/MovieOverview'
+import MoviesCollection from './components/MoviesCollection'
 
 function App() {
 
@@ -81,6 +82,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage query={state.query} requestCount={state.requestCount} />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
+          <Route path="/favorites" element={<MoviesCollection collection="Favorites" movies={state.favorites} />} />
+          <Route path="/watched" element={<MoviesCollection collection="Watched" movies={state.watched} />} />
         </Routes>
       </BrowserRouter>
     </AppDispatch.Provider>
