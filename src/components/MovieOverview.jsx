@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react"
+import React, { useEffect, useContext } from "react"
 import { useImmer } from 'use-immer'
 import { useParams } from 'react-router-dom'
 
 // AXIOS
 import axios from 'axios'
+
+// CONTEXT
+import AppDispatch from "../AppDispatch"
 
 // COPONENTS
 import Page from "./Page"
@@ -14,10 +17,25 @@ function MovieOverview(props) {
   // MOVIE ID
   const { id } = useParams()
 
+  // APP DISPACTH
+  const appDispatch = useContext(AppDispatch)
+
   // LOCAL STATE
   const [state, setState] = useImmer({ movie: {}, cast: [], director: {} })
   const isFavorite = props.favorites.find(favorite => favorite.id === state.movie.id)
+  const isWatched = props.watched.find(watched => watched.id === state.movie.id)
   
+  // HANDLE ACTION
+  function handleAction(collection) {
+    const movie = {
+      id: state.movie.id,
+      title: state.movie.title,
+      release_date: state.movie.release_date,
+      poster_path: state.movie.poster_path
+    }
+    appDispatch({ type: `toggle-collections`, collection: collection, isInCollection: collection == 'favorites' ?  isFavorite : isWatched, movie: movie })
+  }
+
   // FETCH DATA
   useEffect(() => {
     const request = axios.CancelToken.source()
@@ -50,10 +68,10 @@ function MovieOverview(props) {
               <h1 className="font-semibold text-[1.5vw] text-gray-100 leading-none">{state.movie.title}</h1>
               {/* ACTIONS */}
               <div className="flex items-center py-6">
-                <button className="w-10 h-10 bg-sky-900 rounded-full text-white text-sm leading-10"><i className="fas fa-tasks"></i></button>
-                <button className={"w-10 h-10 ml-3 bg-sky-900 rounded-full text-sm leading-10 " + (isFavorite ? 'text-sky-500' : 'text-white')}><i className="fas fa-heart"></i></button>
+                <button onClick={() => handleAction('watched')} className={"w-10 h-10 bg-sky-900 rounded-full text-sm leading-10 " + (isWatched ? 'text-sky-500' : 'text-white')}><i className="fas fa-tasks"></i></button>
+                <button onClick={() => handleAction('favorites')} className={"w-10 h-10 ml-3 bg-sky-900 rounded-full text-sm leading-10 " + (isFavorite ? 'text-sky-500' : 'text-white')}><i className="fas fa-heart"></i></button>
                 {/* <button className="w-10 h-10 ml-3 bg-sky-900 rounded-full text-white text-sm leading-10"><i className="fas fa-star"></i></button> */}
-                <button className="pl-5 font-bold text-white leading-none">view trailer</button>
+                <button className="ml-5 font-bold text-white leading-none">view trailer</button>
               </div>
               {/* ACTIONS */}
               <h2 className="text-sm text-gray-300 italic tracking-wide">{state.movie.tagline}</h2>
