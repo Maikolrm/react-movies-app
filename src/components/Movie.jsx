@@ -17,7 +17,7 @@ function Movie({ movie, remove, collection }) {
   return (
     <div className="relative p-1 bg-white rounded-sm border overflow-hidden">
       {remove && <button onClick={() => handleRemove(movie.id)} className="absolute top-3 left-[50%] -ml-5 z-10 w-10 h-10 bg-gray-900/50 rounded text-sm text-center text-red-400 leading-10 outline-none"><i className="fas fa-trash"></i></button>}
-      <Link to={`/movie-overview/${movie.id}`} className="block max-h-[550px] bg-gray-200 rounded overflow-hidden sm:h-[70vw] md:h-[50vw]">
+      <Link to={`/movie-overview/${movie.id}`} className="block max-h-[550px] bg-gray-200 rounded overflow-hidden sm:h-[70vw] md:h-[50vw] outline-none">
         {movie.poster_path ? <img  className="w-full h-full object-cover" src={"https://themoviedb.org/t/p/w300" + (movie.poster_path)} alt={movie.title} /> : ''}
       </Link>
       <div className="pt-3">
