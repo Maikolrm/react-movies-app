@@ -19,6 +19,10 @@ function Homepage(props) {
   // APP DISPATCH
   const appDispatch = useContext(AppDispatch)
 
+  // FIRST MOUNT
+  useEffect(() => appDispatch({ type: 'show-menu', value: false }), [])
+
+  // WATCH REQUEST COUNT CHANGES
   useEffect(() => {
     const request = axios.CancelToken.source()
     if (props.requestCount && props.query) {
