@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useImmerReducer } from 'use-immer'
 
@@ -22,8 +22,8 @@ function App() {
     fetching: false,
     query: 'wick',
     movies: [],
-    favorites: [],
-    watched: [],
+    favorites: localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [],
+    watched: localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')) : [],
     requestCount: 1
   }
 
@@ -54,6 +54,24 @@ function App() {
   }
   
   const [state, dispatch] = useImmerReducer(reducer, initialState)
+
+  // WATCHING FAVORITES MOVIES
+  useEffect(() => {
+    if (state.favorites.length) {
+      localStorage.setItem('favorites', JSON.stringify(state.favorites))
+    } else {
+      localStorage.removeItem('favorites')
+    }
+  }, [state.favorites])
+
+  // WATCHING WATCHED MOVIES
+  useEffect(() => {
+    if (state.watched.length) {
+      localStorage.setItem('watched', JSON.stringify(state.watched))
+    } else {
+      localStorage.removeItem('watched')
+    }
+  }, [state.watched])
 
   return (
     <AppState.Provider value={state}>
