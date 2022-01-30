@@ -4,17 +4,13 @@ import React, { useEffect, useContext } from "react"
 import axios from "axios"
 
 // CONTEXT
-import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
 // COMPONENTS
 import Page from "./Page"
-import Movies from "./Movies"
+import Movie from "./Movie"
 
 function Homepage(props) {
-
-  // APP STATE
-  const appState = useContext(AppState)
   
   // APP DISPATCH
   const appDispatch = useContext(AppDispatch)
@@ -38,8 +34,8 @@ function Homepage(props) {
   }, [props.requestCount])
 
   return (
-    <Page title="Welcome" >
-      <Movies movies={appState.movies} />
+    <Page title="Welcome" grid={true}>
+      {props.movies.map(movie => <Movie movie={movie} />)}
     </Page>
   )
 }
