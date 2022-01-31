@@ -11,6 +11,7 @@ import AppDispatch from "../AppDispatch"
 // COPONENTS
 import Page from "./Page"
 import MovieCast from "./MovieCast"
+import MovieTrailer from "./MovieTrailer"
 
 function MovieOverview(props) {
 
@@ -58,6 +59,7 @@ function MovieOverview(props) {
 
   return (
     <Page title={`${state.movie.title ? state.movie.title + ' - Overview': '...'}`} >
+      <MovieTrailer movie={{ id: state.movie.id }} />
       <div className="bg-gray-100 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` } }>
         <div className="bg-black/60 p-[2vw] flex">
           <div className="w-[20vw] max-w-[400px] rounded-lg overflow-hidden shadow-lg">
