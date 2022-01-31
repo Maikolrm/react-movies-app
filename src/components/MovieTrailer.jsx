@@ -3,10 +3,21 @@ import React, { useState, useEffect } from "react"
 // AXIOS
 import axios from "axios"
 
-function MovieTrailer({ movie }) {
+function MovieTrailer({ movie, dispatch }) {
 
   // LOCAL STATE
   const [trailer, setTrailer] = useState('')
+
+  /// HANDLE KEYPRESS
+  function handleKeyPress(e) {
+    if (e.keyCode === 27) dispatch({ type: 'show-trailer', value: false })
+  }
+
+  // FRIST MOUNT
+  useEffect(() => {
+    document.addEventListener('keyup', handleKeyPress)
+    return () => document.removeEventListener('keypress', handleKeyPress)
+  }, [])
 
   // FETCH VIDEOS
   useEffect(() => {
@@ -22,7 +33,7 @@ function MovieTrailer({ movie }) {
   }, [movie.id])
 
   return (
-    <div className="fixed inset-0 w-full h-full bg-black/70 flex">
+    <div onClick={() => dispatch({ type: 'show-trailer', value: false })} className="fixed z-10 inset-0 w-full h-full bg-black/70 flex">
       <div className="relative w-[90vw] max-w-[1280px] h-[60vw] max-h-[750px] m-auto rounded-md overflow-hidden">
         <iframe className="absolute inset-0 w-full h-full p-0 border-none" src={`https://www.youtube.com/embed/${trailer}`} allow="fullscreen" frameBorder={0}></iframe>
       </div>
