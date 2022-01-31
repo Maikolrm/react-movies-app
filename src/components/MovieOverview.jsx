@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 // CONTEXT
+import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
 // COPONENTS
@@ -17,6 +18,9 @@ function MovieOverview(props) {
 
   // MOVIE ID
   const { id } = useParams()
+
+  // APP STATE
+  const appState = useContext(AppState)
 
   // APP DISPACTH
   const appDispatch = useContext(AppDispatch)
@@ -59,7 +63,7 @@ function MovieOverview(props) {
 
   return (
     <Page title={`${state.movie.title ? state.movie.title + ' - Overview': '...'}`} >
-      <MovieTrailer movie={{ id: state.movie.id }} />
+      {appState.showTrailer && <MovieTrailer movie={{ id: state.movie.id }} dispatch={appDispatch} />}
       <div className="bg-gray-100 bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` } }>
         <div className="bg-black/60 p-[2vw] flex">
           <div className="w-[20vw] max-w-[400px] rounded-lg overflow-hidden shadow-lg">
@@ -72,7 +76,7 @@ function MovieOverview(props) {
               <button onClick={() => handleAction('watched')} className={"w-10 h-10 bg-sky-900 rounded-full text-sm leading-10 " + (isWatched ? 'text-sky-500' : 'text-white')}><i className="fas fa-tasks"></i></button>
               <button onClick={() => handleAction('favorites')} className={"w-10 h-10 ml-3 bg-sky-900 rounded-full text-sm leading-10 " + (isFavorite ? 'text-sky-500' : 'text-white')}><i className="fas fa-heart"></i></button>
               {/* <button className="w-10 h-10 ml-3 bg-sky-900 rounded-full text-white text-sm leading-10"><i className="fas fa-star"></i></button> */}
-              <button className="ml-5 font-bold text-white leading-none">view trailer</button>
+              <button onClick={() => appDispatch({ type: 'show-trailer', value: true })} className="ml-5 font-bold text-white leading-none">view trailer</button>
             </div>
             {/* ACTIONS */}
             <h2 className="text-sm text-gray-300 italic tracking-wide">{state.movie.tagline}</h2>
