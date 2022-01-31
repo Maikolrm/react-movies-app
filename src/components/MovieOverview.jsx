@@ -69,8 +69,8 @@ function MovieOverview(props) {
           <div className="hidden w-[20vw] max-w-[400px] rounded-lg overflow-hidden shadow-lg xl:block">
             <img className="w-full h-full object-cover" src={`https://themoviedb.org/t/p/w400${state.movie.poster_path}`} alt={state.movie.title} />
           </div>
-          <div className="flex flex-1 flex-col justify-center px-[2vw] pr-[20vw]">
-            <h1 className="font-semibold text-[1.5vw] text-gray-100 leading-none">{state.movie.title}</h1>
+          <div className="flex flex-1 flex-col justify-center p-[2vw] xl:pr-[20vw]">
+            <h1 className="font-semibold text-gray-100 text-[5.5vw] sm:text-[2.3rem] leading-none">{state.movie.title}</h1>
             {/* ACTIONS */}
             <div className="flex items-center py-6">
               <button onClick={() => handleAction('watched')} className={"w-10 h-10 bg-sky-900 rounded-full text-sm leading-10 " + (isWatched ? 'text-sky-500' : 'text-white')}><i className="fas fa-tasks"></i></button>
