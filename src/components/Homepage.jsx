@@ -35,7 +35,7 @@ function Homepage(props) {
 
   return (
     <Page title="Welcome" grid={true}>
-      {props.movies.map(movie => <Movie movie={movie} />)}
+      {props.movies.map(movie => <Movie key={movie.id} movie={movie} />)}
     </Page>
   )
 }
