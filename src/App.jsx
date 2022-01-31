@@ -26,6 +26,7 @@ function App() {
     favorites: localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [],
     watched: localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')) : [],
     showMenu: false,
+    showTrailer: false,
     requestCount: 1
   }
 
@@ -34,6 +35,9 @@ function App() {
     switch(action.type) {
       case 'show-menu':
         draft.showMenu = action.value
+        break
+      case 'show-trailer':
+        draft.showTrailer = action.value
         break
       case 'set-query':
         draft.query = action.query
