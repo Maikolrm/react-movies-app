@@ -22,7 +22,7 @@ function Homepage(props) {
   // WATCH REQUEST COUNT CHANGES
   useEffect(() => {
     const request = axios.CancelToken.source()
-    if (props.requestCount && props.query) {
+    if (!props.requestCount || props.requestCount && props.query) {
       async function fecthData() {
         try {
           const { data } = await axios.get(`/search/movie?api_key=${import.meta.env.VITE_APP_MDB_KEY}&query=${props.query}`)
@@ -36,7 +36,7 @@ function Homepage(props) {
 
   return (
     <Page title="Welcome" grid={Boolean(props.movies.length)}>
-      {Boolean(props.movies.length) ? props.movies.map(movie => <Movie key={movie.id} movie={movie} />) : <ContentHint content={<>No <span className="font-bold">results</span>. Try again.</>} />}
+      {Boolean(props.movies.length) ? props.movies.map(movie => <Movie key={movie.id} movie={movie} />) : props.requestCount ? <ContentHint content={<>No <span className="font-bold">results</span>. Try again.</>} /> : ''}
     </Page>
   )
 }
