@@ -27,7 +27,7 @@ function App() {
     watched: localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')) : [],
     showMenu: false,
     showTrailer: false,
-    requestCount: 1
+    requestCount: 0
   }
 
   // REDUCER
