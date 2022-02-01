@@ -9,6 +9,7 @@ import AppDispatch from "../AppDispatch"
 // COMPONENTS
 import Page from "./Page"
 import Movie from "./Movie"
+import ContentHint from "./ContentHint"
 
 function Homepage(props) {
   
@@ -34,8 +35,8 @@ function Homepage(props) {
   }, [props.requestCount])
 
   return (
-    <Page title="Welcome" grid={true}>
-      {props.movies.map(movie => <Movie key={movie.id} movie={movie} />)}
+    <Page title="Welcome" grid={Boolean(props.movies.length)}>
+      {Boolean(props.movies.length) ? props.movies.map(movie => <Movie key={movie.id} movie={movie} />) : <ContentHint content={<>No <span className="font-bold">results</span>. Try again.</>} />}
     </Page>
   )
 }
