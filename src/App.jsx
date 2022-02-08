@@ -27,12 +27,16 @@ function App() {
     watched: localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')) : [],
     showMenu: false,
     showTrailer: false,
+    theme: localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')) : 'light',
     requestCount: 0
   }
 
   // REDUCER
   function reducer(draft, action) {
     switch(action.type) {
+      case 'toggle-theme':
+        draft.theme = action.theme == 'light' ? 'dark' : 'light'
+        break
       case 'show-menu':
         draft.showMenu = action.value
         break
@@ -81,6 +85,13 @@ function App() {
       localStorage.removeItem('watched')
     }
   }, [state.watched])
+
+  // TOGGLE DARK MODE
+  useEffect(() => {
+    const root = document.documentElement
+    state.theme == 'dark' ? root.classList.add('dark') : root.classList.remove('dark')
+    localStorage.setItem('theme', JSON.stringify(state.theme))
+  }, [state.theme])
 
   return (
     <AppState.Provider value={state}>
