@@ -9,8 +9,9 @@ What this app can do?
 
 ### Features
 
-- Simple and beatuful
+- Simple and beautiful
 - Responsive
+- Toggle theme ( dark and light mode )
 
 ### Technologies
 
