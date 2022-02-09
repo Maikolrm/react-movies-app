@@ -2,9 +2,9 @@ import React, { useEffect } from "react"
 
 function MovieCasting({ cast }) {
   return (
-    <div className="mt-5 w-[90%] m-auto">
-      <h2 className="text-lg font-semibold text-gray-500">Movie Cast</h2>
-      <div className="flex overflow-auto py-2 mt-3">
+    <div className="p-10">
+      <h2 className="text-lg font-semibold text-gray-500 leading-none">Movie Cast</h2>
+      <div className="flex overflow-auto mt-5">
         {cast.map(actor => (
           <div key={actor.id} className="min-w-[200px] mr-3 bg-white rounded overflow-hidden shadow dark:bg-gray-700">
             <div className="h-[250px] bg-gray-200 overflow-hidden dark:bg-gray-800">
