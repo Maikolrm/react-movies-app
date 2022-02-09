@@ -28,7 +28,7 @@ function App() {
     showMenu: false,
     showTrailer: false,
     theme: localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')) : 'light',
-    blured: true,
+    blured: false,
     requestCount: 0
   }
 
