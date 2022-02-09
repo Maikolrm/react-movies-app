@@ -11,7 +11,7 @@ function MovieCasting({ cast }) {
               <img className="w-full object-cover" src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
             </div>
             <div className="p-2">
-              <h3 className="text-md text-gray-800 font-bold leading-none tracking-wide truncate dark:text-gray-900">{actor.name}</h3>
+              <h3 className="text-md text-gray-800 font-bold leading-none tracking-wide truncate dark:text-gray-200">{actor.name}</h3>
               <p className="mt-2 text-xs text-gray-400 leading-none truncate">{actor.character}</p>
             </div>
           </div>
