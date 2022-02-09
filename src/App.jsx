@@ -28,6 +28,7 @@ function App() {
     showMenu: false,
     showTrailer: false,
     theme: localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')) : 'light',
+    blured: true,
     requestCount: 0
   }
 
@@ -39,6 +40,7 @@ function App() {
         break
       case 'show-menu':
         draft.showMenu = action.value
+        draft.blured = action.value
         break
       case 'show-trailer':
         draft.showTrailer = action.value
