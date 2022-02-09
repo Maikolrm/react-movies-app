@@ -5,8 +5,8 @@ function MovieCasting({ cast }) {
     <div className="p-10">
       <h2 className="text-lg font-semibold text-gray-500 leading-none">Movie Cast</h2>
       <div className="flex overflow-auto mt-5">
-        {cast.map(actor => (
-          <div key={actor.id} className="min-w-[200px] mr-3 bg-white rounded overflow-hidden shadow dark:bg-gray-700">
+        {cast.map((actor, i) => (
+          <div key={actor.id} className={`min-w-[200px] bg-white ${i < (cast.length - 1) ? 'mr-3' : '' } rounded overflow-hidden shadow dark:bg-gray-700`}>
             <div className="h-[250px] bg-gray-200 overflow-hidden dark:bg-gray-800">
               <img className="w-full object-cover" src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
             </div>
