@@ -36,7 +36,8 @@ function MovieOverview(props) {
       id: state.movie.id,
       title: state.movie.title,
       release_date: state.movie.release_date,
-      poster_path: state.movie.poster_path
+      poster_path: state.movie.poster_path,
+      vote_average: state.movie.vote_average
     }
     appDispatch({ type: `toggle-collections`, collection: collection, isInCollection: collection == 'favorites' ?  isFavorite : isWatched, movie: movie })
   }
