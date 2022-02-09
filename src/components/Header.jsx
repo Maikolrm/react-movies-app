@@ -72,12 +72,12 @@ function Header(props) {
         </div>
         {/* MOVIES SUGGESTIONS */}
       </div>
-      <div className="relative">
+      <div className="relative z-20">
         <button ref={button} onClick={() => appDispatch({ type: 'show-menu', value: !appState.showMenu })} className="block w-10 h-10 border-2 border-gray-400 rounded-full focus:border-teal-600 outline-none overflow-hidden">
           <img src="https://www.gravatar.com/avatar/4c47390a9b7da357a0d6d051bbf66270?s=200" alt="Maikol Hernandez" />
         </button>
         {appState.showMenu && (
-          <div className="absolute z-20 right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
+          <div className="absolute right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
             <button onClick={() => appDispatch({ type: 'toggle-theme', theme: appState.theme })} className="block w-full p-2 bg-gray-200 rounded text-xs text-left text-gray-400 outline-none">
               {appState.theme == 'light' ? 'Dark Mode' : 'Light Mode' }
               <span className="inline-block mr-[5px] float-right">
