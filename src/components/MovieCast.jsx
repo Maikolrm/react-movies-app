@@ -8,7 +8,7 @@ function MovieCasting({ cast }) {
         {cast.map((actor, i) => (
           <div key={actor.id} className={`min-w-[200px] bg-white ${i < (cast.length - 1) ? 'mr-3' : '' } rounded overflow-hidden shadow dark:bg-gray-700`}>
             <div className="h-[250px] bg-gray-200 overflow-hidden dark:bg-gray-800">
-              <img className="w-full object-cover" src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
+              {actor.profile_path && <img className="w-full object-cover" src={`https://themoviedb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />}
             </div>
             <div className="p-2">
               <h3 className="text-md text-gray-800 font-bold leading-none tracking-wide truncate dark:text-gray-200">{actor.name}</h3>
