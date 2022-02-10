@@ -25,7 +25,7 @@ function Homepage(props) {
     if (!props.requestCount || props.requestCount && props.query) {
       async function fecthData() {
         try {
-          const { data } = await axios.get(`/search/movie?api_key=${import.meta.env.VITE_APP_MDB_KEY}&query=${props.query}`)
+          const { data } = await axios.get(`/search/movie?api_key=${import.meta.env.VITE_APP_MDB_KEY}&query=${!props.requestCount ? 'wick' : props.query}`)
           appDispatch({ type: 'set-movies', movies: data.results })
         } catch(e) { console.log(e) }
       }
