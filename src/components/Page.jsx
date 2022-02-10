@@ -11,7 +11,7 @@ function Page(props) {
   }, [props.title])
 
   return (
-    <Container grid={props.grid}>
+    <Container grid={props.grid} count={props.count} heading={props.heading}>
       {props.children}
     </Container>
   )
