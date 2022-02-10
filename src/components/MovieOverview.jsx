@@ -13,6 +13,7 @@ import AppDispatch from "../AppDispatch"
 import Page from "./Page"
 import MovieCast from "./MovieCast"
 import MovieTrailer from "./MovieTrailer"
+import VoteAverage from "./VoteAverage"
 
 function MovieOverview(props) {
 
@@ -76,8 +77,8 @@ function MovieOverview(props) {
               {/* ACTIONS */}
               <div className="flex items-center py-6">
                 <button onClick={() => handleAction('watched')} className={"w-10 h-10 bg-sky-900 rounded-full text-sm leading-10 " + (isWatched ? 'text-sky-500' : 'text-white')}><i className="fas fa-tasks"></i></button>
-                <button onClick={() => handleAction('favorites')} className={"w-10 h-10 ml-3 bg-sky-900 rounded-full text-sm leading-10 " + (isFavorite ? 'text-sky-500' : 'text-white')}><i className="fas fa-heart"></i></button>
-                {/* <button className="w-10 h-10 ml-3 bg-sky-900 rounded-full text-white text-sm leading-10"><i className="fas fa-star"></i></button> */}
+                <button onClick={() => handleAction('favorites')} className={"w-10 h-10 mx-3 bg-sky-900 rounded-full text-sm leading-10 " + (isFavorite ? 'text-sky-500' : 'text-white')}><i className="fas fa-heart"></i></button>
+                <VoteAverage movie={state.movie} />
                 <button onClick={() => appDispatch({ type: 'show-trailer', value: true })} className="ml-5 font-bold text-white leading-none outline-none">view trailer</button>
               </div>
               {/* ACTIONS */}
