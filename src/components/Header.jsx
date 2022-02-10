@@ -80,12 +80,12 @@ function Header(props) {
           <div className="absolute right-0 w-[300px] p-1 mt-3 bg-white rounded shadow-md">
             <button onClick={() => appDispatch({ type: 'toggle-theme', theme: appState.theme })} className="block w-full p-2 bg-gray-200 rounded text-xs text-left text-gray-400 outline-none">
               {appState.theme == 'light' ? 'Dark Mode' : 'Light Mode' }
-              <span className="inline-block mr-[5px] float-right">
+              <span className="inline-block float-right">
                 <i className={`fas ${appState.theme == 'dark' ? 'text-orange-400 fa-sun' : 'text-sky-500 fa-moon'}`}></i>
               </span>
             </button>
-            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/favorites" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right">( {appState.favorites.length} )</span></Link>
-            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right">( {appState.watched.length} )</span></Link>
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/favorites" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right"><i className="fas fa-heart"></i></span></Link>
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right"><i className="fas fa-eye"></i></span></Link>
             <button className="block w-full py-2 mt-1 bg-sky-400 rounded-sm text-sm text-white outline-none hover:bg-sky-500 focus:bg-sky-500">Logout</button>
           </div>
         )}
