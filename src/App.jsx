@@ -21,7 +21,7 @@ function App() {
   // INITIAL STATE
   const initialState = {
     fetching: false,
-    query: 'wick',
+    query: '',
     movies: [],
     favorites: localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : [],
     watched: localStorage.getItem('watched') ? JSON.parse(localStorage.getItem('watched')) : [],
