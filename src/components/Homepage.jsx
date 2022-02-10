@@ -35,7 +35,7 @@ function Homepage(props) {
   }, [props.requestCount])
 
   return (
-    <Page title="Welcome" grid={Boolean(props.movies.length)}>
+    <Page title="Welcome" grid={Boolean(props.movies.length)} count={props.movies.length} heading="movies">
       {Boolean(props.movies.length) ? props.movies.map(movie => <Movie key={movie.id} movie={movie} />) : props.requestCount ? <ContentHint content={<>No <span className="font-bold">results</span>. Try again.</>} /> : ''}
     </Page>
   )
