@@ -66,10 +66,10 @@ function MovieOverview(props) {
   return (
     <Page title={`${state.movie.title ? state.movie.title + ' - Overview': '...'}`} >
       {appState.showTrailer && <MovieTrailer movie={{ id: state.movie.id }} dispatch={appDispatch} />}
-      <div className="bg-no-repeat bg-cover bg-center" style={{ backgroundImage: `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` } }>
+      <div className="bg-no-repeat bg-cover bg-center" style={{ backgroundImage: state.movie.id ? `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` : '' } }>
         <div className="bg-black/60 p-[2vw] flex">
           <div className="hidden w-[25vw] max-w-[350px] h-[40vw] max-h-[550px] rounded-lg overflow-hidden shadow-lg xl:block">
-            <img className="w-full h-full object-cover" src={`https://themoviedb.org/t/p/w400${state.movie.poster_path}`} alt={state.movie.title} />
+            {state.movie.id && <img className="w-full h-full object-cover" src={`https://themoviedb.org/t/p/w400${state.movie.poster_path}`} alt={state.movie.title} />}
           </div>
           {state.movie.id && (
             <div className="flex flex-1 flex-col justify-center p-[2vw] xl:pr-[20vw]">
