@@ -33,7 +33,7 @@ function MovieTrailer({ movie, dispatch }) {
   }, [movie.id])
 
   return (
-    <div onClick={() => dispatch({ type: 'show-trailer', value: false })} className="fixed z-10 inset-0 w-full h-full bg-black/70 flex">
+    <div onClick={() => dispatch({ type: 'show-trailer', value: false })} className="fixed z-[1000] inset-0 w-full h-full bg-black/70 flex">
       <div className="relative w-[90vw] max-w-[1280px] h-[60vw] max-h-[750px] m-auto rounded-md overflow-hidden">
         <iframe className="absolute inset-0 w-full h-full p-0 border-none" src={`https://www.youtube.com/embed/${trailer}`} allow="fullscreen" frameBorder={0}></iframe>
       </div>
