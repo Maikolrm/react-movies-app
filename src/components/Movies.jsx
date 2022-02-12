@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react"
-
+import { useParams } from "react-router-dom"
 // AXIOS
 import axios from "axios"
 
@@ -13,11 +13,19 @@ import ContentHint from "./ContentHint"
 
 function Movies(props) {
   
+  // URL PARAMS
+  const params = useParams()
+
   // APP DISPATCH
   const appDispatch = useContext(AppDispatch)
 
   // FIRST MOUNT
   useEffect(() => appDispatch({ type: 'show-menu', value: false }), [])
+
+  // WATCHING URL PARAMS CHANGES
+  useEffect(() => {
+    params.query ? appDispatch({ type: 'search-movies', query: params.query }) : null
+  }, [params.query])
 
   // WATCH REQUEST COUNT CHANGES
   useEffect(() => {
