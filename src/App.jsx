@@ -49,12 +49,11 @@ function App() {
         draft.query = action.query
         break
       case 'search-movies':
+        draft.query = action.query
         draft.fetching = true
-        draft.requestCount++
         break
       case 'set-movies':
         draft.movies = action.movies
-        draft.query = ''
         draft.fetching = false
         break
       case `toggle-collections`:
@@ -101,7 +100,7 @@ function App() {
       <BrowserRouter>
         <Header query={state.query} fetching={state.fetching} />
         <Routes>
-          <Route path="/" element={<Movies movies={state.movies} query={state.query} requestCount={state.requestCount} />} />
+          <Route path="/" element={<Movies movies={state.movies} query="john wick" />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
           <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
           <Route path="/watched" element={<MoviesCollection collection="watched" movies={state.watched} />} />
