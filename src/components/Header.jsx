@@ -27,7 +27,7 @@ function Header(props) {
     e.preventDefault()
     if (query.trim() && !props.fetching) {
       appDispatch({ type: 'search-movies', query: query })
-      navigate('/')
+      navigate('/search-movies/' + query)
       setQuery('')
     }
   }
