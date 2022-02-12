@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useEref, useRef } from "react"
+import React, { useState, useEffect, useContext, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 // CONTEXT
@@ -6,6 +6,9 @@ import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
 function Header(props) {
+
+  // LOCAL STATE
+  const [query, setQuery] = useState('')
 
   // BUTTON REF
   const button = useRef()
@@ -22,9 +25,10 @@ function Header(props) {
   // HANDLE SUBMIT
   function handleSubmit(e) {
     e.preventDefault()
-    if (props.query.trim() && !props.fetching) {
+    if (query.trim() && !props.fetching) {
+      appDispatch({ type: 'search-movies', query: query })
       navigate('/')
-      appDispatch({ type: 'search-movies' })
+      setQuery('')
     }
   }
 
@@ -48,7 +52,7 @@ function Header(props) {
       <Link to="/" className="block text-teal-400 font-bold leading-none">MDB</Link>
       <div className="relative flex-1 mx-4 max-w-md bg-white rounded-full">
         <form onSubmit={handleSubmit} className="flex rounded-full overflow-hidden">
-          <input value={props.query} onChange={e => appDispatch({ type: 'set-query', query: e.target.value })} type="text" className="flex-1 pl-5 text-xs text-gray-500 leading-10 tracking-widest outline-none" placeholder="Search...."/>
+          <input value={query} onChange={e => setQuery(e.target.value)} type="text" className="flex-1 pl-5 text-xs text-gray-500 leading-10 tracking-widest outline-none" placeholder="Search...."/>
           <button tabIndex="-1" disbled={props.fetching ? 'disabled' : ''} className={"w-10 h-10 text-[14px] text-center leading-10 outline-none " + (props.fetching ? 'text-sky-500 animate-spin' : 'text-gray-400')}>
             <i className={"fas " +  (props.fetching ? 'fa-circle-notch' : 'fa-search')}></i>
           </button>
