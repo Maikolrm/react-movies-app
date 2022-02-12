@@ -29,6 +29,7 @@ function App() {
     showTrailer: false,
     theme: localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')) : 'light',
     blured: false,
+    searches: { show: false, results: ['john wick', 'rambo', 'avengers', 'tesla'] },
     requestCount: 0
   }
 
