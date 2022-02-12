@@ -64,7 +64,7 @@ function MovieOverview(props) {
   }, [])
 
   return (
-    <Page title={`${state.movie.title ? state.movie.title + ' - Overview': '...'}`} >
+    <Page title={state.movie.title} >
       {appState.showTrailer && <MovieTrailer movie={{ id: state.movie.id }} dispatch={appDispatch} />}
       <div className="bg-no-repeat bg-cover bg-center" style={{ backgroundImage: state.movie.id ? `url(https://themoviedb.org/t/p/w1280${state.movie.backdrop_path})` : '' } }>
         <div className="bg-black/60 p-[2vw] flex">
