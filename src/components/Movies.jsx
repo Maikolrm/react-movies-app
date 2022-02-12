@@ -11,7 +11,7 @@ import Page from "./Page"
 import Movie from "./Movie"
 import ContentHint from "./ContentHint"
 
-function Homepage(props) {
+function Movies(props) {
   
   // APP DISPATCH
   const appDispatch = useContext(AppDispatch)
@@ -41,4 +41,4 @@ function Homepage(props) {
   )
 }
 
-export default Homepage
+export default Movies
