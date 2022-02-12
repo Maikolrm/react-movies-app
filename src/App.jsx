@@ -12,7 +12,7 @@ import AppDispatch from './AppDispatch'
 
 // COMPONENTS
 import Header from './components/Header'
-import Homepage from './components/Homepage'
+import Movies from './components/Movies'
 import MovieOverview from './components/MovieOverview'
 import MoviesCollection from './components/MoviesCollection'
 
@@ -101,7 +101,7 @@ function App() {
       <BrowserRouter>
         <Header query={state.query} fetching={state.fetching} />
         <Routes>
-          <Route path="/" element={<Homepage movies={state.movies} query={state.query} requestCount={state.requestCount} />} />
+          <Route path="/" element={<Movies movies={state.movies} query={state.query} requestCount={state.requestCount} />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
           <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
           <Route path="/watched" element={<MoviesCollection collection="watched" movies={state.watched} />} />
