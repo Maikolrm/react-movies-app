@@ -53,8 +53,8 @@ function Header(props) {
       <div className="relative flex-1 mx-4 max-w-md bg-white rounded-full">
         <form onSubmit={handleSubmit} className="flex rounded-full overflow-hidden">
           <input value={query} onChange={e => setQuery(e.target.value)} type="text" className="flex-1 pl-5 text-xs text-gray-500 leading-10 tracking-widest outline-none" placeholder="Search...."/>
-          <button tabIndex="-1" disbled={props.fetching ? 'disabled' : ''} className={"w-10 h-10 text-[14px] text-center leading-10 outline-none " + (props.fetching ? 'text-sky-500 animate-spin' : 'text-gray-400')}>
-            <i className={"fas " +  (props.fetching ? 'fa-circle-notch' : 'fa-search')}></i>
+          <button tabIndex="-1" disbled={props.fetching ? 'disabled' : ''} className={"w-10 h-10 text-[14px] text-center leading-10 outline-none " + (props.fetching ? 'text-sky-500' : 'text-gray-400')}>
+            <i className={"fas " +  (props.fetching ? 'fa-circle-notch animate-spin' : 'fa-search')}></i>
           </button>
         </form>
         {/* MOVIES SUGGESTIONS */}
