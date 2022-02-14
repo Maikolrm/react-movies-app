@@ -41,10 +41,16 @@ function App() {
         break
       case 'show-menu':
         draft.showMenu = action.value
+        draft.searches.show = false
         draft.blured = action.value
         break
       case 'show-trailer':
         draft.showTrailer = action.value
+        break
+      case 'show-searches':
+        draft.blured = action.value
+        draft.searches.show = action.value
+        draft.showMenu = false
         break
       case 'set-query':
         draft.query = action.query
