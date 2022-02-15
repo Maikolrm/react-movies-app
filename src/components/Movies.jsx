@@ -11,8 +11,14 @@ import Page from "./Page"
 import Movie from "./Movie"
 import ContentHint from "./ContentHint"
 
+// API
+import { handleSearches } from "../api/api"
+
 function Movies(props) {
   
+  // LOCAL VARIABLES
+  const searchResults = props.searches.results
+
   // URL PARAMS
   const params = useParams()
 
@@ -34,7 +40,7 @@ function Movies(props) {
       async function fecthData() {
         try {
           const { data } = await axios.get(`/search/movie?api_key=${import.meta.env.VITE_APP_MDB_KEY}&query=${props.query}`)
-          appDispatch({ type: 'set-movies', movies: data.results })
+          appDispatch({ type: 'set-movies', movies: data.results, searches: searchResults && data.results.length ? handleSearches([...searchResults], props.query.toLowerCase()) : undefined })
         } catch(e) { console.log(e) }
       }
       fecthData()
