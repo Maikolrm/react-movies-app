@@ -33,7 +33,6 @@ function Header(props) {
   function handleSubmit(e) {
     e.preventDefault()
     if (query.trim() && !props.fetching) {
-      appDispatch({ type: 'search-movies', query: query })
       navigate('/search-movies/' + query)
       setQuery('')
       field.current.blur()
