@@ -70,7 +70,7 @@ function Header(props) {
         <div className={`absolute mt-3 left-0 w-full p-1 bg-white rounded shadow-lg ${showSearches ? '' : 'hidden'}`}>
           {searchResults.map((query, i) => (
             <Link key={i} to={`/search-movies/${query}`} onClick={() => appDispatch({ type: 'show-searches', value: false })} className={`flex items-center ${i ? 'mt-1' : ''} bg-gray-100 outline-none rounded-sm text-gray-500 hover:bg-sky-500 hover:text-white focus:bg-sky-500 focus:text-white`}>
-              <span className="inline-block w-10 h-10 text-xs text-center leading-10"><i className="fas fa-clock"></i></span>
+              <span className="inline-block w-8 h-10 text-xs text-center leading-10"><i className="fas fa-clock"></i></span>
               <h2 className="flex-1 font-bold uppercase text-[11px] leading-none tracking-widest">{query}</h2>
             </Link>
           ))}
