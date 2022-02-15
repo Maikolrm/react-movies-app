@@ -29,7 +29,10 @@ function App() {
     showTrailer: false,
     theme: localStorage.getItem('theme') ? JSON.parse(localStorage.getItem('theme')) : 'light',
     blured: false,
-    searches: { show: false, results: ['john wick', 'rambo', 'avengers', 'tesla'] },
+    searches: {
+      show: false,
+      results: localStorage.getItem('searches') ? JSON.parse(localStorage.getItem('searches')) : []
+    },
     requestCount: 0
   }
 
@@ -64,6 +67,7 @@ function App() {
         draft.fetching = false
         draft.blured = false
         draft.searches.show = false
+        action.searches ? draft.searches.results = action.searches : null
         break
       case `toggle-collections`:
         // COLLECTION MAKES REFERENCES TO FAVORITES OR WATCHED MOVIES
@@ -103,14 +107,19 @@ function App() {
     localStorage.setItem('theme', JSON.stringify(state.theme))
   }, [state.theme])
 
+  // WATCHING SEARCHES
+  useEffect(() => {
+    localStorage.setItem('searches', JSON.stringify(state.searches.results))
+  }, [state.searches.results])
+
   return (
     <AppState.Provider value={state}>
     <AppDispatch.Provider value={dispatch}>
       <BrowserRouter>
-        <Header query={state.query} fetching={state.fetching} />
+        <Header query={state.query} fetching={state.fetching} searches={state.searches} />
         <Routes>
-          <Route path="/" element={<Movies movies={state.movies} query="john wick" />} />
-          <Route path="/search-movies/:query" element={<Movies movies={state.movies} query={state.query} />} />
+          <Route path="/" element={<Movies movies={state.movies} query="john wick" searches={{ results: null }} />} />
+          <Route path="/search-movies/:query" element={<Movies movies={state.movies} query={state.query} searches={state.searches} />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
           <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
           <Route path="/watched" element={<MoviesCollection collection="watched" movies={state.watched} />} />
