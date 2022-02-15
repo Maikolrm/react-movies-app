@@ -10,6 +10,10 @@ function Header(props) {
   // LOCAL STATE
   const [query, setQuery] = useState('')
 
+  // LOCAL VARIABLES
+  const showSearches = props.searches.show
+  const searchResults = props.searches.results
+
   // FIELD REF
   const field = useRef()
 
@@ -57,14 +61,14 @@ function Header(props) {
       <Link to="/" className="block outline-none text-teal-400 font-bold leading-none">MDB</Link>
       <div className="relative z-[200] flex-1 mx-4 max-w-md bg-white rounded-full">
         <form onSubmit={handleSubmit} className="flex rounded-full overflow-hidden">
-          <input ref={field} onFocus={() => appDispatch({ type: 'show-searches', value: true })} value={query} onChange={e => setQuery(e.target.value)} type="text" className="flex-1 pl-5 text-xs text-gray-500 leading-10 tracking-widest outline-none" placeholder="Search...." />
+          <input ref={field} onFocus={() => appDispatch({ type: 'show-searches', value: Boolean(searchResults.length) })} value={query} onChange={e => setQuery(e.target.value)} type="text" className="flex-1 pl-5 text-xs text-gray-500 leading-10 tracking-widest outline-none" placeholder="Search...." />
           <button tabIndex="-1" disbled={props.fetching ? 'disabled' : ''} className={"w-10 h-10 text-[14px] text-center leading-10 outline-none " + (props.fetching ? 'text-sky-500' : 'text-gray-400')}>
             <i className={"fas " +  (props.fetching ? 'fa-circle-notch animate-spin' : 'fa-search')}></i>
           </button>
         </form>
         {/* MOVIES SUGGESTIONS */}
-        <div className={`absolute mt-3 left-0 w-full p-1 bg-white rounded shadow-lg ${appState.searches.show ? '' : 'hidden'}`}>
-          {appState.searches.results.map((query, i) => (
+        <div className={`absolute mt-3 left-0 w-full p-1 bg-white rounded shadow-lg ${showSearches ? '' : 'hidden'}`}>
+          {searchResults.map((query, i) => (
             <Link key={i} to={`/search-movies/${query}`} onClick={() => appDispatch({ type: 'show-searches', value: false })} className={`flex items-center ${i ? 'mt-1' : ''} bg-gray-100 outline-none rounded-sm text-gray-500 hover:bg-sky-500 hover:text-white focus:bg-sky-500 focus:text-white`}>
               <span className="inline-block w-10 h-10 text-xs text-center leading-10"><i className="fas fa-clock"></i></span>
               <h2 className="flex-1 font-bold uppercase text-[11px] leading-none tracking-widest">{query}</h2>
