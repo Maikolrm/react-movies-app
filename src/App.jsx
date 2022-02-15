@@ -62,6 +62,8 @@ function App() {
       case 'set-movies':
         draft.movies = action.movies
         draft.fetching = false
+        draft.blured = false
+        draft.searches.show = false
         break
       case `toggle-collections`:
         // COLLECTION MAKES REFERENCES TO FAVORITES OR WATCHED MOVIES
