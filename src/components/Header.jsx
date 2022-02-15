@@ -32,6 +32,7 @@ function Header(props) {
       appDispatch({ type: 'search-movies', query: query })
       navigate('/search-movies/' + query)
       setQuery('')
+      field.current.blur()
     }
   }
 
