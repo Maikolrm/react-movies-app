@@ -67,7 +67,9 @@ function App() {
         draft.fetching = false
         draft.blured = false
         draft.searches.show = false
-        action.searches ? draft.searches.results = action.searches : null
+        break
+      case 'set-searches':
+        draft.searches.results = action.searches
         break
       case `toggle-collections`:
         // COLLECTION MAKES REFERENCES TO FAVORITES OR WATCHED MOVIES
