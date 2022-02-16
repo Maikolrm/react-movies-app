@@ -100,8 +100,8 @@ function Header(props) {
                 <i className={`fas ${appState.theme == 'dark' ? 'text-orange-400 fa-sun' : 'text-sky-500 fa-moon'}`}></i>
               </span>
             </button>
-            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/favorites" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right"><i className="fas fa-heart"></i></span></Link>
-            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right"><i className="fas fa-eye"></i></span></Link>
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/favorites" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Fovorite movies <span className="float-right inline-block pr-1">{appState.favorites.length}</span></Link>
+            <Link onClick={() => appDispatch({ type: 'show-menu', value: false })} to="/watched" className="block p-2 mt-1 hover:bg-gray-100 text-xs text-gray-400 outline-none focus:bg-gray-100">Watched movies <span className="float-right inline-block pr-1">{appState.watched.length}</span></Link>
             <button className="block w-full py-2 mt-1 bg-sky-400 rounded-sm text-sm text-white outline-none hover:bg-sky-500 focus:bg-sky-500">Logout</button>
           </div>
         )}
