@@ -40,7 +40,8 @@ function Movies(props) {
       async function fecthData() {
         try {
           const { data } = await axios.get(`/search/movie?api_key=${import.meta.env.VITE_APP_MDB_KEY}&query=${props.query}`)
-          appDispatch({ type: 'set-movies', movies: data.results, searches: searchResults && data.results.length ? handleSearches([...searchResults], props.query.toLowerCase()) : undefined })
+          appDispatch({ type: 'set-movies', movies: data.results })
+          searchResults && data.results.length ? appDispatch({ type: 'set-searches', searches: handleSearches(searchResults, props.query, 'new') }) : null
         } catch(e) { console.log(e) }
       }
       fecthData()
