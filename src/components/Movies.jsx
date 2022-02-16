@@ -17,7 +17,7 @@ import { handleSearches } from "../api/api"
 function Movies(props) {
   
   // LOCAL VARIABLES
-  const searchResults = props.searches.results
+  const searchResults = props.searches ? props.searches.results : null
 
   // URL PARAMS
   const params = useParams()
