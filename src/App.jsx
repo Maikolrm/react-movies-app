@@ -120,7 +120,7 @@ function App() {
       <BrowserRouter>
         <Header query={state.query} fetching={state.fetching} searches={state.searches} />
         <Routes>
-          <Route path="/" element={<Movies movies={state.movies} query="john wick" searches={{ results: null }} />} />
+          <Route path="/" element={<Movies movies={state.movies} query="john wick" />} />
           <Route path="/search-movies/:query" element={<Movies movies={state.movies} query={state.query} searches={state.searches} />} />
           <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
           <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
