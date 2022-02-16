@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom"
 import AppState from "../AppState"
 import AppDispatch from "../AppDispatch"
 
+// API
+import { handleSearches } from '../api/api'
+
 function Header(props) {
 
   // LOCAL STATE
@@ -49,6 +52,14 @@ function Header(props) {
     }
   }
 
+  // HANDLE CLICK
+  function handleClick(e) {
+    const node = e.target.nodeName
+    if (node != 'BUTTON') return appDispatch({ type: 'show-searches', value: false })
+    e.preventDefault()
+    appDispatch({ type: 'set-searches', searches: handleSearches(searchResults, e.target.getAttribute('data-query'), 'delete') })
+  }
+
   // TOGGLE KEYPRESS EVENT
   useEffect(() => {
     document.addEventListener('keyup', handleKeypres)
@@ -68,9 +79,10 @@ function Header(props) {
         {/* MOVIES SUGGESTIONS */}
         <div className={`absolute mt-3 left-0 w-full p-1 bg-white rounded shadow-lg ${showSearches ? '' : 'hidden'}`}>
           {searchResults.map((query, i) => (
-            <Link key={i} to={`/search-movies/${query}`} onClick={() => appDispatch({ type: 'show-searches', value: false })} className={`flex items-center ${i ? 'mt-1' : ''} bg-gray-100 outline-none rounded-sm text-gray-500 hover:bg-sky-500 hover:text-white focus:bg-sky-500 focus:text-white`}>
+            <Link key={i} to={`/search-movies/${query}`} onClick={handleClick} className={`flex items-center ${i ? 'mt-1' : ''} bg-gray-100 outline-none rounded-sm text-gray-500 hover:bg-sky-500 hover:text-white focus:bg-sky-500 focus:text-white`}>
               <span className="inline-block w-8 h-10 text-xs text-center leading-10"><i className="fas fa-clock"></i></span>
               <h2 className="flex-1 font-bold uppercase text-[11px] leading-none tracking-widest">{query}</h2>
+              <button data-query={query} tabIndex="-1" className="inline-block w-8 h-10 text-sm text-center text-white fas fa-times leading-10"></button>
             </Link>
           ))}
         </div>
