@@ -55,9 +55,6 @@ function App() {
         draft.searches.show = action.value
         draft.showMenu = false
         break
-      case 'set-query':
-        draft.query = action.query
-        break
       case 'search-movies':
         draft.query = action.query
         draft.fetching = true
