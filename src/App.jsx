@@ -118,13 +118,13 @@ function App() {
     <AppState.Provider value={state}>
     <AppDispatch.Provider value={dispatch}>
       <BrowserRouter>
-        <Header query={state.query} fetching={state.fetching} searches={state.searches} />
+        <Header />
         <Routes>
-          <Route path="/" element={<Movies movies={state.movies} query="john wick" />} />
-          <Route path="/search-movies/:query" element={<Movies movies={state.movies} query={state.query} searches={state.searches} />} />
-          <Route path="/movie-overview/:id" element={<MovieOverview favorites={state.favorites} watched={state.watched} />} />
-          <Route path="/favorites" element={<MoviesCollection collection="favorites" movies={state.favorites} />} />
-          <Route path="/watched" element={<MoviesCollection collection="watched" movies={state.watched} />} />
+          <Route path="/" element={<Movies page="welcome" />} />
+          <Route path="/search-movies/:query" element={<Movies page="searches" />} />
+          <Route path="/movie-overview/:id" element={<MovieOverview />} />
+          <Route path="/favorites" element={<MoviesCollection collection="favorites" />} />
+          <Route path="/watched" element={<MoviesCollection collection="watched" />} />
         </Routes>
       </BrowserRouter>
     </AppDispatch.Provider>
