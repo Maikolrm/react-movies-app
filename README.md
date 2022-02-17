@@ -1,19 +1,19 @@
 ## React Movies Applicaction
 
-What this app can do?
+#### What this app can do?
 
 - Search for movies
 - View movies details
 - View movies trailer
 - Save movies as favorites or watched
 
-### Features
+#### Features
 
 - Simple and beautiful
 - Responsive
 - Toggle theme ( dark and light mode )
 
-### Technologies
+#### Technologies
 
 - HTML5
 - CSS3
@@ -22,7 +22,7 @@ What this app can do?
 - RactJS
 - localStorage
 
-### Screenshots
+#### Screenshots
 
 - Welcome screen
 
