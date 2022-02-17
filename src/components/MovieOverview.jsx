@@ -15,7 +15,7 @@ import MovieCast from "./MovieCast"
 import MovieTrailer from "./MovieTrailer"
 import VoteAverage from "./VoteAverage"
 
-function MovieOverview(props) {
+function MovieOverview() {
 
   // MOVIE ID
   const { id } = useParams()
@@ -28,8 +28,8 @@ function MovieOverview(props) {
 
   // LOCAL STATE
   const [state, setState] = useImmer({ movie: {}, cast: [], director: {} })
-  const isFavorite = props.favorites.find(favorite => favorite.id === state.movie.id)
-  const isWatched = props.watched.find(watched => watched.id === state.movie.id)
+  const isFavorite = appState.favorites.find(favorite => favorite.id === state.movie.id)
+  const isWatched = appState.watched.find(watched => watched.id === state.movie.id)
   
   // HANDLE ACTION
   function handleAction(collection) {
